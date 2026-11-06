@@ -28,7 +28,7 @@ Changes to the contract between Half A and Half B always need both people's agre
 | Q1 | Does "Zerodha" mean the **Kite** app? Zerodha also has other apps, such as Coin | Tejas | Phase 0 |
 | Q2 | Which Google account owns the doc and draft? Connectors act as whichever account signed in, so it should be checked before Phase 1. The Drive connector is already signed in to an account | Tejas | Phase 1 (B) |
 | Q3 | What recipient alias should the draft use? | Tejas | Phase 3 (B) |
-| Q4 | Who provides the Anthropic API key? API use is billed separately from a Claude subscription | Both | Phase 2 |
+| Q4 | Which local model, and can both machines run it? Check RAM and whether there is a GPU. A machine that cannot run it uses the free hosted option (D-020) | Both | Phase 2 |
 | Q5 | Is an unofficial Play Store library acceptable to whoever assesses this milestone? See D-006 | Both | Phase 1 (A) |
 | Q6 | Teammate's name, for the owner fields | Tejas | No |
 | Q7 | Does Docs MCP really have no create tool? Confirm from the live tool list | Tejas | Phase 1 (B) |
@@ -122,11 +122,11 @@ Changes to the contract between Half A and Half B always need both people's agre
 
 - **Date:** 2026-11-06 · **Status:** Proposed · **Owner:** Both
 - **Decision:** Python 3.13, managed with `uv`.
-- **Why:** `google-play-scraper` is a Python library and the Anthropic SDK is available for Python. Python 3.13 and uv are on Tejas's machine. The teammate's setup still needs checking.
+- **Why:** `google-play-scraper` is a Python library, and Ollama has a Python client. Python 3.13 and uv are on Tejas's machine. The teammate's setup still needs checking.
 
 ### D-012: LLM model and output format
 
-- **Date:** 2026-11-06 · **Status:** Proposed · **Owner:** Both
+- **Date:** 2026-11-06 · **Status:** Superseded by D-019 and D-020 (paid API dropped) · **Owner:** Both
 - **Decision:** Use `claude-opus-5-5` through the Anthropic Python SDK, with structured outputs. Set `effort` explicitly and handle a `refusal` stop reason.
 - **Why:** Structured output means Python can check every field. Prices are $4 per million input tokens and $20 per million output tokens as of the 2026-10-06 model table.
 - **Cost:** About 1,500 short reviews per run suggests under $1 a week. This is an estimate; eval P5-4 records the real figure. A cheaper model can be tried later if the gold-set score holds.
@@ -145,6 +145,7 @@ Changes to the contract between Half A and Half B always need both people's agre
 - **Decision:** `/deliver-pulse` is a Claude Code command using the Google connectors. It is run by hand each week.
 - **Why:** It needs no OAuth code, meets C5 directly, and tool permissions can be allowed or denied by name. The cadence is weekly and the output is a draft, so a human starting it is fine.
 - **Alternative:** The Claude API MCP connector, which could run unattended but means managing Google OAuth tokens. Better as a later step if the run is scheduled.
+- **Cost note:** This step needs a Claude Code session on Tejas's account, so it is not free for anyone without one. Half A needs no Claude access at all.
 
 ### D-015: Create the doc through Drive, fill it through Docs
 
@@ -165,6 +166,25 @@ Changes to the contract between Half A and Half B always need both people's agre
 - **Date:** 2026-11-06 · **Status:** Proposed · **Owner:** Tejas
 - **Decision:** Each run records doc and draft IDs in `delivery.json`, and the agent searches for an existing doc by title first.
 - **Why:** A failure between the doc and the draft is the likeliest partial failure, and a rerun must not create duplicates.
+
+### D-019: Free resources only
+
+- **Date:** 2026-11-06 · **Status:** Accepted by Tejas, teammate to confirm · **Owner:** Both
+- **Decision:** The project uses no paid service. Every component must run on free tools or free tiers.
+- **Why:** Project constraint set by Tejas.
+- **Consequence:** The paid Anthropic API in D-012 is dropped. The other parts are already free: App Store RSS (D-005), `google-play-scraper` (D-006), Python and uv (D-004), a private GitHub repo, and the Google connectors on a normal Google account.
+- **Risk:** Free tiers can change their limits or terms. Where a free tier is used (D-020), check its current terms first, and the pipeline must stop instead of switching to a paid service (eval P3-B11).
+
+### D-020: Swappable LLM interface, free local model by default
+
+- **Date:** 2026-11-06 · **Status:** Proposed · **Owner:** Both
+- **Decision:** All LLM calls go through one function, `llm.complete(prompt, schema)`, in `src/pulse/llm/`. The default provider is a local model served by **Ollama**. An optional free hosted tier can be added as a second provider for a machine that cannot run the local model.
+- **Why:** A local model costs nothing, has no rate limits or keys, and review text stays on the machine. One interface means a provider change never touches the rest of the code, and each person can use whichever works on their hardware.
+- **Model choice:** Not fixed yet. In Phase 3 (task A3.7) each available model is scored on the 100-review gold set, and the best one that runs on both machines is recorded here.
+- **To confirm in Phase 0:** that the chosen Ollama version accepts a JSON schema for structured output, and that setting temperature to 0 and a fixed seed makes runs repeatable. Both help eval P3-A6.
+- **Risk:** Small local models write weaker notes and label themes less accurately. The validation gate and gold set exist to catch this. If the quality is not good enough, the fallback is the free hosted tier, never a paid one.
+- **Risk:** A hosted free tier receives review text. It is public and PII-scrubbed, but some free tiers may use inputs for training, so check the terms before using one. Neither tier's current limits have been verified.
+- **Alternative:** Hosted free tier only, which is easier to set up but depends on limits and terms outside our control.
 
 ---
 

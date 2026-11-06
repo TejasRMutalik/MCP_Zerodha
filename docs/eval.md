@@ -24,8 +24,9 @@
 | P0-3 | Sample data covers hard cases | Manual | Includes a redacted review, an `other` theme, a short review and an empty title |
 | P0-4 | Secrets and data stay out of git | Auto | `.env` and `data/` are ignored |
 | P0-5 | Blocking questions closed | Manual | Every "Blocks" item in the open questions list has an answer |
+| P0-6 | Free LLM works on both machines | Manual | `llm.complete()` returns schema-valid JSON for a test prompt on each machine, with no paid API key set |
 
-**Exit criteria:** P0-1 to P0-5 pass.
+**Exit criteria:** P0-1 to P0-6 pass.
 
 ---
 
@@ -142,8 +143,9 @@
 | P3-B8 | Partial failure recovers | Manual | With a draft failure simulated after the doc step, a rerun finishes without a second doc |
 | P3-B9 | No direct Google integration (C5) | Auto | No `googleapis.com`, `google-auth` or `google-api-python-client` in code or dependencies |
 | P3-B10 | Agent tools are minimal | Manual | Session log shows only allowlisted tool calls |
+| P3-B11 | No paid dependency | Auto | Dependencies contain no paid-only service, and the pipeline runs with no paid API key in the environment |
 
-**Exit criteria:** P3-B1 to P3-B10 pass.
+**Exit criteria:** P3-B1 to P3-B11 pass.
 
 ### Phase 3 results
 
@@ -183,7 +185,7 @@
 | P5-1 | README works alone | Manual | Each person completes a run on a clean checkout using only the README |
 | P5-2 | Repeatable | Manual | A second week's run passes every automated check |
 | P5-3 | Failure guidance works | Manual | README tells the reader what to do for expired auth, a store failure and a failed gate |
-| P5-4 | Cost is known | Manual | Actual API cost of one run is recorded in `decision.md` |
+| P5-4 | Run is free | Manual | A full run completes using no paid service. Run time on the default model is recorded in `decision.md` |
 
 **Exit criteria:** P5-1 to P5-4 pass and the final checklist below is complete.
 

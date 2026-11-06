@@ -43,9 +43,9 @@ Phase 5   Weekly run, README    ████ both
 | 0.3 | Write `contracts/schema.py` for both shared files | Both |
 | 0.4 | Hand-write `contracts/samples/` with 30 fake reviews and 5 themes. Include a redacted review, an `other` theme and short reviews | Both |
 | 0.5 | Close the open questions in [decision.md](decision.md#open-questions) | Both |
-| 0.6 | Get an Anthropic API key and store it in `.env` | Both |
+| 0.6 | Install Ollama, pull the agreed model, and write the shared `llm` interface in `src/pulse/llm/`: local by default, with an optional free hosted provider | Both |
 
-**Output:** a repo both people can clone, a fixed contract, sample data, and no blocking open questions.
+**Output:** a repo both people can clone, a fixed contract, sample data, a working `llm.complete()` on both machines, and no blocking open questions.
 
 ---
 
@@ -119,6 +119,7 @@ Phase 5   Weekly run, README    ████ both
 | A3.4 | Compute `count` and `avg_rating` in Python, never from the LLM |
 | A3.5 | Hand-label 100 reviews as a gold set and measure agreement |
 | A3.6 | Keep theme names stable week to week so results can be compared |
+| A3.7 | Run the gold set against each available model (local and, if used, hosted) and record the pick and its score in `decision.md` |
 
 Theme ideas to test, not findings: order execution, app outages at market open, login and 2FA, charts, funds and withdrawals, charges. The problem statement's examples, such as KYC, may not fit a trading app already past onboarding.
 
