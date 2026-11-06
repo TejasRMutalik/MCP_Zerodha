@@ -144,7 +144,7 @@
 | P3-B6 | Draft only (C6) | Manual | One new item in Drafts, none added to Sent, recipient equals `config.local.toml` |
 | P3-B7 | Reruns are safe | Manual | Running delivery twice leaves one doc and one draft |
 | P3-B8 | Partial failure recovers | Manual | With a draft failure simulated after the doc step, a rerun finishes without a second doc |
-| P3-B9 | No direct Google integration (C5) | Auto | No `googleapis.com`, `google-auth` or `google-api-python-client` in code or dependencies |
+| P3-B9 | No direct Google integration (C5) | Auto | No Docs, Drive or Gmail API host (`docs.`, `gmail.`, `drive.` or `www.googleapis.com`) and no `google-auth` or `google-api-python-client` in code or dependencies. The Gemini text endpoint (`generativelanguage.googleapis.com`) is the LLM and is allowed (D-022). Implemented in `tests/test_constraints.py` |
 | P3-B10 | Agent tools are minimal | Manual | Session log shows only allowlisted tool calls |
 | P3-B11 | No paid dependency | Auto + Manual | Dependencies contain no paid-only service, and the pipeline runs with no paid API key in the environment. Manually confirm that no billing is linked to the Gemini key's project |
 

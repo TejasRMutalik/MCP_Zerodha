@@ -1,0 +1,28 @@
+# Shared settings. Safe to commit: no secrets and no personal addresses.
+# Personal values (like the draft recipient) go in config.local.toml, which is git-ignored.
+
+[product]
+name = "Zerodha Kite"
+app_store_id = "1449453802"
+play_store_id = "com.zerodha.kite3"
+country = "in"
+language = "en"
+window_weeks = 12
+
+[llm]
+# Tried in this order. On repeated 429/5xx errors the next one is used.
+# Never add a paid provider here (D-019).
+providers = ["gemini", "groq"]
+batch_size = 50
+max_retries = 3
+cache_dir = ".cache/llm"
+
+[llm.gemini]
+model = "gemini-3.5-flash-lite"
+min_interval_s = 5.0     # measured 2026-11-06: about 15 requests/min, then HTTP 429. Daily cap not yet known (Q9)
+temperature = 0.0
+
+[llm.groq]
+model = "openai/gpt-oss-20b"
+min_interval_s = 2.0     # headers show 1,000 requests/day and 8,000 tokens/min (measured 2026-11-06)
+temperature = 0.0

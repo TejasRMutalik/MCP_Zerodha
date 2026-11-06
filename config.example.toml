@@ -1,0 +1,6 @@
+# Copy this file to config.local.toml (git-ignored) and fill in your own values.
+# Values here override config.toml.
+
+[delivery]
+# The Gmail draft is addressed to you (D-021). Plain address only, no "Name <address>" form.
+recipient = "you@example.com"

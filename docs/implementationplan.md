@@ -40,7 +40,7 @@ Phase 5   Weekly run, README    ████ both
 |---|---|---|
 | 0.1 | Run `git init`, add `.gitignore` (`data/`, `.env`, `config.local.toml`), create the shared repo | Both |
 | 0.2 | Create the folder layout from the architecture doc, plus `pyproject.toml` and `config.toml` | Both |
-| 0.3 | Write `contracts/schema.py` for both shared files | Both |
+| 0.3 | Write `src/pulse/schema.py` for both shared files | Both |
 | 0.4 | Hand-write `contracts/samples/` with 30 fake reviews and 5 themes. Include a redacted review, an `other` theme and short reviews | Both |
 | 0.5 | Close the open questions in [decision.md](decision.md#open-questions) | Both |
 | 0.6 | Each person creates their own Gemini API key in Google AI Studio (**do not link billing**) and a Groq key as backup, and stores them in `.env` | Both |
@@ -48,6 +48,8 @@ Phase 5   Weekly run, README    ████ both
 | 0.8 | Run one 50-review test batch through each provider and record the real limits, speed and errors in D-022 | Both |
 
 **Output:** a repo both people can clone, a fixed contract, sample data, a working `llm.complete()` on both machines, and no blocking open questions.
+
+**Status on 2026-11-06 (Tejas):** 0.2, 0.3, 0.4 and 0.7 are built and tested (`uv run pytest`). 0.6 and 0.8 are done for Tejas's keys, with results in D-022. Still to do: the teammate's keys and test batch (0.6, 0.8), Q9/Q10 limits, and the teammate's review of the contract.
 
 ---
 

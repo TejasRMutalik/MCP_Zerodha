@@ -218,10 +218,11 @@ E:\MCP
 ├── .env                          your LLM API keys (Gemini, Groq), never committed
 ├── docs/                         these four documents
 ├── contracts/
-│   ├── schema.py                 shared definitions of both files
 │   └── samples/                  sample reviews_clean.json, themes.json
 ├── src/pulse/
-│   ├── llm/                      both: swappable LLM interface (Gemini, Groq, Ollama)
+│   ├── schema.py                 shared definitions of the two contract files
+│   ├── config.py                 config.toml, config.local.toml and .env loading
+│   ├── llm/                      both: swappable LLM interface (Gemini and Groq built; Ollama optional, not built)
 │   ├── ingest/                   A: adapters, normaliser
 │   ├── pii/                      A: scrubber, find_pii()
 │   ├── themes/                   A: theme grouper

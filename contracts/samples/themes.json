@@ -1,0 +1,27 @@
+[
+  {
+    "theme": "order execution",
+    "count": 7,
+    "avg_rating": 2.0
+  },
+  {
+    "theme": "outages and crashes",
+    "count": 7,
+    "avg_rating": 1.7
+  },
+  {
+    "theme": "login and 2FA",
+    "count": 6,
+    "avg_rating": 1.7
+  },
+  {
+    "theme": "charts and watchlists",
+    "count": 4,
+    "avg_rating": 3.2
+  },
+  {
+    "theme": "other",
+    "count": 6,
+    "avg_rating": 3.8
+  }
+]

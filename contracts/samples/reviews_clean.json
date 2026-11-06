@@ -1,0 +1,272 @@
+[
+  {
+    "store": "play_store",
+    "rating": 1,
+    "title": "",
+    "text": "Orders get stuck on pending for minutes during market open. Lost a good entry because of it.",
+    "date": "2026-10-14",
+    "theme": "order execution",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 2,
+    "title": "",
+    "text": "Stop loss order rejected without any clear reason shown.",
+    "date": "2026-10-02",
+    "theme": "order execution",
+    "redacted": false
+  },
+  {
+    "store": "app_store",
+    "rating": 2,
+    "title": "Slow order placement",
+    "text": "Order confirmation takes too long on volatile days.",
+    "date": "2026-09-19",
+    "theme": "order execution",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 3,
+    "title": "",
+    "text": "Basket orders are useful but the margin calculation looks off sometimes.",
+    "date": "2026-09-27",
+    "theme": "order execution",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 1,
+    "title": "",
+    "text": "Modified my order and it executed at the old price. Very frustrating.",
+    "date": "2026-10-21",
+    "theme": "order execution",
+    "redacted": false
+  },
+  {
+    "store": "app_store",
+    "rating": 4,
+    "title": "Fast and reliable",
+    "text": "Order execution is quick. Works fine for intraday.",
+    "date": "2026-10-30",
+    "theme": "order execution",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 1,
+    "title": "",
+    "text": "Order rejected again at 9:15. Nothing works when it matters most.",
+    "date": "2026-11-03",
+    "theme": "order execution",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 1,
+    "title": "",
+    "text": "App crashes right at market open every single day this week.",
+    "date": "2026-10-09",
+    "theme": "outages and crashes",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 1,
+    "title": "",
+    "text": "Kite is down again. Cannot see my positions at all.",
+    "date": "2026-10-28",
+    "theme": "outages and crashes",
+    "redacted": false
+  },
+  {
+    "store": "app_store",
+    "rating": 1,
+    "title": "Down during volatility",
+    "text": "Whenever the market moves a lot the app just freezes.",
+    "date": "2026-09-05",
+    "theme": "outages and crashes",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 2,
+    "title": "",
+    "text": "Keeps hanging on the positions screen and I have to restart it.",
+    "date": "2026-09-14",
+    "theme": "outages and crashes",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 2,
+    "title": "",
+    "text": "Everything goes blank for a few minutes randomly, then comes back.",
+    "date": "2026-10-17",
+    "theme": "outages and crashes",
+    "redacted": false
+  },
+  {
+    "store": "app_store",
+    "rating": 2,
+    "title": "Crashes after update",
+    "text": "The latest update crashes on my phone as soon as I open it.",
+    "date": "2026-11-01",
+    "theme": "outages and crashes",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 3,
+    "title": "",
+    "text": "Mostly works but gets laggy when the market is busy.",
+    "date": "2026-08-28",
+    "theme": "outages and crashes",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 1,
+    "title": "",
+    "text": "TOTP keeps failing even though the time on my phone is correct.",
+    "date": "2026-10-12",
+    "theme": "login and 2FA",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 2,
+    "title": "",
+    "text": "Logged out every morning and I need to do the whole login again.",
+    "date": "2026-09-22",
+    "theme": "login and 2FA",
+    "redacted": false
+  },
+  {
+    "store": "app_store",
+    "rating": 2,
+    "title": "Login issues",
+    "text": "Face unlock does not work, always asks for the PIN and the code.",
+    "date": "2026-10-06",
+    "theme": "login and 2FA",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 1,
+    "title": "",
+    "text": "Cannot login since morning, it says invalid password but it is correct.",
+    "date": "2026-10-25",
+    "theme": "login and 2FA",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 3,
+    "title": "",
+    "text": "Login is secure but too many steps every day.",
+    "date": "2026-09-09",
+    "theme": "login and 2FA",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 1,
+    "title": "",
+    "text": "Mera account login nahi ho raha, otp aa raha hai par error aata hai.",
+    "date": "2026-10-31",
+    "theme": "login and 2FA",
+    "redacted": false
+  },
+  {
+    "store": "app_store",
+    "rating": 4,
+    "title": "Great charts",
+    "text": "Chart tools are good, would love more indicators on mobile.",
+    "date": "2026-09-30",
+    "theme": "charts and watchlists",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 3,
+    "title": "",
+    "text": "Watchlist sorting resets every time I reopen the app.",
+    "date": "2026-10-08",
+    "theme": "charts and watchlists",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 2,
+    "title": "",
+    "text": "Cannot draw trendlines properly on the small screen, the line keeps moving.",
+    "date": "2026-08-31",
+    "theme": "charts and watchlists",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 4,
+    "title": "",
+    "text": "Clean interface. Charts load quickly.",
+    "date": "2026-11-02",
+    "theme": "charts and watchlists",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 5,
+    "title": "",
+    "text": "Good app",
+    "date": "2026-10-10",
+    "theme": "other",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 5,
+    "title": "",
+    "text": "Best platform for investing",
+    "date": "2026-09-03",
+    "theme": "other",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 5,
+    "title": "",
+    "text": "Nice",
+    "date": "2026-09-18",
+    "theme": "other",
+    "redacted": false
+  },
+  {
+    "store": "app_store",
+    "rating": 5,
+    "title": "Simple and clean",
+    "text": "Easy to use and no unnecessary clutter, perfect for beginners.",
+    "date": "2026-10-15",
+    "theme": "other",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 1,
+    "title": "",
+    "text": "Worst app ever",
+    "date": "2026-10-01",
+    "theme": "other",
+    "redacted": false
+  },
+  {
+    "store": "play_store",
+    "rating": 2,
+    "title": "",
+    "text": "Support asked me to email my details to [redacted] and nobody replied for days.",
+    "date": "2026-10-23",
+    "theme": "other",
+    "redacted": true
+  }
+]

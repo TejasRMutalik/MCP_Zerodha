@@ -235,7 +235,13 @@ These cannot be settled from here: each needs a person or an outside party.
   5. Never link billing to the Gemini key's project.
   6. Send only scrubbed text, so no PII ever reaches a hosted provider.
   7. Each person uses their own key, because limits apply per project or organisation.
-- **Open:** Q9 and Q10. The provider and model are confirmed by the Phase 0 batch test and the gold-set comparison (A3.7).
+- **Implementation:** both providers are called over plain HTTP with `httpx`, not through vendor SDKs, so no Google auth library is installed and the "no direct Google API code" check (P3-B9) stays simple. Ollama is not built.
+- **Measured 2026-11-06 on Tejas's keys** (Phase 0 test, one batch of 50 invented sample reviews per call, run with `scripts/llm_batch_test.py`):
+  - **Gemini `gemini-3.5-flash-lite`:** 50 of 50 labelled, all matching the sample labels, in 3.5 s. A burst of tiny requests got 15 successes in about 22 s and then HTTP 429, so about **15 requests per minute**. No rate-limit headers are sent, and the 429 carried no wait time. The **daily cap is still unknown** (Q9). Config spaces calls 5 s apart.
+  - **Groq `openai/gpt-oss-20b`:** 50 of 50 labelled, all matching, in 2.1 s. The response headers show **1,000 requests per day and 8,000 tokens per minute** for this key, and one 50-review batch used about 1,700 tokens. Whether these are the free-plan limits, and whether Groq asked for a card, is still open (Q10).
+  - **Caveat:** the sample reviews are invented and easy, so 50 of 50 shows that the plumbing and JSON-schema output work, not real labelling quality. Task A3.5 measures quality on real reviews, and real reviews are longer, so token counts will rise.
+  - **Rough capacity:** 1,500 reviews is about 30 batches. Gemini at 5 s spacing takes about 3 minutes. Groq is limited by tokens, about 30 × 1,700 = 51,000 tokens, so roughly 7 minutes at 8,000 per minute.
+- **Open:** Q9 (Gemini's daily cap, shown in AI Studio) and Q10 (Groq's card question and free-plan limits). The final model choice comes from the gold-set comparison (A3.7).
 - **Risk:** Free tiers can change limits, terms or models without notice. Hosted providers see review text, though it is public and scrubbed. Whether Gemini's terms suit this project should be read once (Q9).
 - **Alternative:** Local Ollama only (D-020), which has no limits or data sharing but needs capable hardware and gives weaker output.
 
