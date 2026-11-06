@@ -24,9 +24,10 @@
 | P0-3 | Sample data covers hard cases | Manual | Includes a redacted review, an `other` theme, a short review and an empty title |
 | P0-4 | Secrets and data stay out of git | Auto | `.env`, `data/` and `config.local.toml` are ignored |
 | P0-5 | Blocking questions closed | Manual | Every "Blocks" item in the open questions list has an answer |
-| P0-6 | Free LLM works on both machines | Manual | `llm.complete()` returns schema-valid JSON for a test prompt on each machine, with no paid API key set |
+| P0-6 | Free LLM works for both people | Manual | `llm.complete()` returns schema-valid JSON for a 50-review test batch on each machine, using that person's own free key with no billing linked |
+| P0-7 | Real limits are recorded | Manual | Actual free limits, speed and any errors for Gemini and Groq are written in D-022 |
 
-**Exit criteria:** P0-1 to P0-6 pass.
+**Exit criteria:** P0-1 to P0-7 pass.
 
 ---
 
@@ -41,7 +42,7 @@
 | P1-A3 | Window is correct | Auto | Every `date` falls inside the run's window |
 | P1-A4 | Fields are complete | Auto | Every row has a valid store, rating 1–5, date, and non-empty text |
 | P1-A5 | Identifying fields are never stored | Auto | Output keys are exactly the allowlist. No author, user name, user image, review ID or link |
-| P1-A6 | Public data only (C1) | Manual | Code review finds no login, cookie or token use |
+| P1-A6 | Public data only (C1) | Manual | Code review finds no login, cookie or token use, and no Zerodha or Kite Connect credentials |
 | P1-A7 | Failures stop the run | Auto | A simulated store failure stops with an error instead of writing a partial file |
 
 **Exit criteria:** P1-A1 to P1-A7 pass.
@@ -126,8 +127,10 @@
 | P3-A5 | `other` is not hiding real issues | Manual | Under 45% of reviews. Sampling 30 `other` reviews rated ≤ 2★ shows no missed major theme |
 | P3-A6 | Theme stability | Auto | A second run on the same data keeps the same theme names and moves under 10% of reviews |
 | P3-A7 | Contract holds | Auto | `schema.py` validates real output |
+| P3-A8 | LLM failures are handled | Auto | A simulated 429 error retries, then switches to the backup provider, then stops. A rerun reads results from the cache and makes no new calls |
+| P3-A9 | No PII is sent to a provider | Auto | The text in every LLM request is checked with `find_pii()`, and the run stops if anything is found |
 
-**Exit criteria:** P3-A1 to P3-A7 pass.
+**Exit criteria:** P3-A1 to P3-A9 pass.
 
 ### Half B: Validation gate and delivery agent (Tejas)
 
@@ -143,7 +146,7 @@
 | P3-B8 | Partial failure recovers | Manual | With a draft failure simulated after the doc step, a rerun finishes without a second doc |
 | P3-B9 | No direct Google integration (C5) | Auto | No `googleapis.com`, `google-auth` or `google-api-python-client` in code or dependencies |
 | P3-B10 | Agent tools are minimal | Manual | Session log shows only allowlisted tool calls |
-| P3-B11 | No paid dependency | Auto | Dependencies contain no paid-only service, and the pipeline runs with no paid API key in the environment |
+| P3-B11 | No paid dependency | Auto + Manual | Dependencies contain no paid-only service, and the pipeline runs with no paid API key in the environment. Manually confirm that no billing is linked to the Gemini key's project |
 
 **Exit criteria:** P3-B1 to P3-B11 pass.
 

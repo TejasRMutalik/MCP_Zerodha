@@ -30,6 +30,7 @@ Changes to the contract between Half A and Half B always need both people's agre
 | Q1 | Does "Zerodha" mean the Kite app? | Yes: Kite. See D-001 |
 | Q3 | Which recipient for the draft? | Yourself, set in a git-ignored file. See D-021 |
 | Q7 | Does the Docs MCP server have a create tool? | No: Google's reference page and a third-party review both list only `read_doc` and `update_doc`. See D-015. Rechecked against the live list in Phase 1 |
+| Q4 | Can the teammate's machine run a local model? | It no longer needs to: a hosted free API is the default (D-022). Local Ollama is optional |
 
 ### Still open
 
@@ -38,10 +39,11 @@ These cannot be settled from here: each needs a person or an outside party.
 | # | Question | Owner | Blocks |
 |---|---|---|---|
 | Q2 | Which Google account owns the doc and draft? Only Tejas can sign the Docs and Gmail connectors in. Check which account the Drive connector already uses | Tejas | Phase 1 (B) |
-| Q4 | Can the teammate's machine run a local model? Tejas's can (D-020). The teammate runs the hardware check in D-020 and posts the result. If it cannot, they use the free hosted option | Teammate | Phase 2 |
+| Q9 | Create your own Gemini API key in Google AI Studio **without linking billing**, and read the actual free limits shown there. Also read Google's Gemini terms about professional or business use | Both | Phase 0 |
+| Q10 | Create a Groq account and key for the backup, read its limits page, and check whether it asks for a card (the docs did not say). If it needs a card, skip Groq and use local Ollama as the backup | Both | Phase 2 |
 | Q5 | Is an unofficial Play Store library acceptable to whoever assesses this milestone? Work continues on the assumption it is, with the fallback in D-006 | Tejas | Not blocking |
 | Q6 | Teammate's name, for the owner fields | Tejas | No |
-| Q8 | Does the teammate agree with D-019, D-020 and D-021? | Teammate | Phase 0 |
+| Q8 | Does the teammate agree with D-019 to D-023? | Teammate | Phase 0 |
 
 ---
 
@@ -133,7 +135,7 @@ These cannot be settled from here: each needs a person or an outside party.
 
 - **Date:** 2026-11-06 · **Status:** Proposed · **Owner:** Both
 - **Decision:** Python 3.13, managed with `uv`.
-- **Why:** `google-play-scraper` is a Python library, and Ollama has a Python client. Python 3.13 and uv are on Tejas's machine. The teammate's setup still needs checking.
+- **Why:** `google-play-scraper` is a Python library, and the hosted LLM APIs can be called from Python (so can a local Ollama server). Python 3.13 and uv are on Tejas's machine. The teammate's setup still needs checking.
 
 ### D-012: LLM model and output format
 
@@ -187,18 +189,18 @@ These cannot be settled from here: each needs a person or an outside party.
 - **Decision:** The project uses no paid service. Every component must run on free tools or free tiers.
 - **Why:** Project constraint set by Tejas.
 - **Consequence:** The paid Anthropic API in D-012 is dropped. The other parts are already free: App Store RSS (D-005), `google-play-scraper` (D-006), Python and uv (D-004), a private GitHub repo, and the Google connectors on a normal Google account.
-- **Risk:** Free tiers can change their limits or terms. Where a free tier is used (D-020), check its current terms first, and the pipeline must stop instead of switching to a paid service (eval P3-B11).
+- **Risk:** Free tiers can change their limits or terms. Where a free tier is used (D-022), check its current terms first, and the pipeline must stop instead of switching to a paid service (eval P3-B11).
 
 ### D-020: Swappable LLM interface, free local model by default
 
-- **Date:** 2026-11-06 · **Status:** Proposed · **Owner:** Both
+- **Date:** 2026-11-06 · **Status:** Partly superseded by D-022: the interface and the Ollama notes still apply, but the default provider is now a hosted API · **Owner:** Both
 - **Decision:** All LLM calls go through one function, `llm.complete(prompt, schema)`, in `src/pulse/llm/`. The default provider is a local model served by **Ollama**. An optional free hosted tier can be added as a second provider for a machine that cannot run the local model.
 - **Why:** A local model costs nothing, has no rate limits or keys, and review text stays on the machine. One interface means a provider change never touches the rest of the code, and each person can use whichever works on their hardware.
 - **Model choice:** Not fixed yet. In Phase 3 (task A3.7) each available model is scored on the 100-review gold set, and the best one that runs on both machines is recorded here.
 - **Checked 2026-11-06 against Ollama's docs:** a JSON schema goes in the `format` field (Python: `format=Model.model_json_schema()`), and `options` accepts `temperature` and `seed`. The docs recommend temperature 0 for more deterministic output. Whether that gives identical runs is still tested by eval P3-A6. Ollama's cloud does not support structured outputs, so only a local server is used.
 - **Candidate models** (download sizes from Ollama's library): `qwen3:4b` 2.5 GB, `gemma3:4b` 3.4 GB, `llama3.2:3b` 2.0 GB, and the larger `qwen3:8b` 5.2 GB.
 - **Tejas's machine:** 15.7 GB RAM, i5-12450H, RTX 3050 Laptop GPU with 4 GB video memory. The 2–3.4 GB models should fit on the GPU. The 8B model would spill onto the CPU and run slowly. Ollama is not installed yet.
-- **Teammate's hardware check** (PowerShell on Windows). Post the result in the repo or chat:
+- **Optional hardware check**, only for trying local Ollama (PowerShell on Windows):
 
 ```powershell
 "{0:N1} GB RAM" -f ((Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory/1GB); Get-CimInstance Win32_VideoController | Select-Object Name; nvidia-smi --query-gpu=name,memory.total --format=csv
@@ -215,6 +217,34 @@ These cannot be settled from here: each needs a person or an outside party.
 - **Decision:** The Gmail draft is addressed to the Google account that owns it (self). The address lives in `config.local.toml`, which is git-ignored. A committed `config.example.toml` shows the format.
 - **Why:** C6 allows self or an alias, and self needs no extra setup. Keeping the address out of the repo means the teammate and any future public copy never see it.
 - **Alternative:** A dedicated alias, which can be swapped in later by editing one file.
+
+### D-022: Hosted free LLM API by default: Gemini first, Groq as backup
+
+- **Date:** 2026-11-06 · **Status:** Proposed (Tejas chose a hosted API; the provider is confirmed by the Phase 0 test) · **Owner:** Both
+- **Decision:** The default provider is the **Gemini API free tier** through Google AI Studio. The backup is **Groq** with `gpt-oss-20b` or `gpt-oss-120b`. Local Ollama (D-020) stays as an optional third provider. All three sit behind `llm.complete()`, and provider and model names live in `config.toml`, never in code.
+- **Why:** Tejas chose a hosted API for easier setup and better quality than a small local model. Gemini's pricing page lists several Flash and Flash-Lite models as free for input and output, and its docs describe JSON-schema output. Groq's `gpt-oss-20b` and `gpt-oss-120b` are listed as production models with strict JSON-schema output.
+- **Checked 2026-11-06 from the providers' official pages** (some pages were truncated and partly summarised by the reading tool):
+  - **Gemini:** the exact free limits are not on the docs page and are shown inside AI Studio. Free-tier content is used to improve Google products, and human reviewers may read it. Linking Cloud Billing turns the project into a Paid Service. The terms describe the service as for professional or business use and for people 18 or older.
+  - **Groq:** the limits table I found (`gpt-oss` models: 30 requests/min, 1,000/day, 8,000 tokens/min, 200,000 tokens/day) is labelled Developer plan, so the free-plan numbers are unconfirmed. Whether a card is needed was not found. By default no customer data is retained, and no statement about training was found. Structured output cannot be combined with streaming or tool use. `qwen3.8-27b` is a preview model and may be removed.
+  - **OpenRouter:** free models are limited to 20 requests/min and 50/day, and structured-output support varies per model. **Mistral:** its free tier could not be verified. Neither was chosen.
+- **Rules that keep it working on free tiers:**
+  1. Send reviews in batches of about 50 per request, which is roughly 30 requests a week instead of 1,500.
+  2. On a 429 error, retry with a growing delay, then switch to the backup provider, then stop. Never switch to a paid service.
+  3. Save every result by review ID, so a rerun makes no new calls.
+  4. Keep model names in `config.toml` and avoid preview models.
+  5. Never link billing to the Gemini key's project.
+  6. Send only scrubbed text, so no PII ever reaches a hosted provider.
+  7. Each person uses their own key, because limits apply per project or organisation.
+- **Open:** Q9 and Q10. The provider and model are confirmed by the Phase 0 batch test and the gold-set comparison (A3.7).
+- **Risk:** Free tiers can change limits, terms or models without notice. Hosted providers see review text, though it is public and scrubbed. Whether Gemini's terms suit this project should be read once (Q9).
+- **Alternative:** Local Ollama only (D-020), which has no limits or data sharing but needs capable hardware and gives weaker output.
+
+### D-023: No Zerodha or Kite Connect API keys
+
+- **Date:** 2026-11-06 · **Status:** Accepted · **Owner:** Tejas
+- **Decision:** The project uses no Zerodha or Kite Connect credentials.
+- **Why:** Kite Connect is for trading and account data and has nothing about app reviews. It needs a logged-in Zerodha account, which breaks C1 (public data only, no logins), and a key tied to a trading account could place orders. I believe it is a paid product, though I did not check the price, which would conflict with D-019.
+- **Keys in this project:** only the LLM keys, each person's own, in a git-ignored `.env`. Google access goes through the MCP connectors, so there is no Google key in the code.
 
 ---
 

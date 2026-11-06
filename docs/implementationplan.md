@@ -43,7 +43,9 @@ Phase 5   Weekly run, README    ████ both
 | 0.3 | Write `contracts/schema.py` for both shared files | Both |
 | 0.4 | Hand-write `contracts/samples/` with 30 fake reviews and 5 themes. Include a redacted review, an `other` theme and short reviews | Both |
 | 0.5 | Close the open questions in [decision.md](decision.md#open-questions) | Both |
-| 0.6 | Install Ollama, pull the agreed model, and write the shared `llm` interface in `src/pulse/llm/`: local by default, with an optional free hosted provider | Both |
+| 0.6 | Each person creates their own Gemini API key in Google AI Studio (**do not link billing**) and a Groq key as backup, and stores them in `.env` | Both |
+| 0.7 | Write the shared `llm` interface in `src/pulse/llm/`: Gemini and Groq providers (optional Ollama), batching of about 50 reviews, retry with failover, and a per-review result cache | Both |
+| 0.8 | Run one 50-review test batch through each provider and record the real limits, speed and errors in D-022 | Both |
 
 **Output:** a repo both people can clone, a fixed contract, sample data, a working `llm.complete()` on both machines, and no blocking open questions.
 
@@ -119,7 +121,7 @@ Phase 5   Weekly run, README    ████ both
 | A3.4 | Compute `count` and `avg_rating` in Python, never from the LLM |
 | A3.5 | Hand-label 100 reviews as a gold set and measure agreement |
 | A3.6 | Keep theme names stable week to week so results can be compared |
-| A3.7 | Run the gold set against each available model (local and, if used, hosted) and record the pick and its score in `decision.md` |
+| A3.7 | Run the gold set through each available provider and model, and record the pick and its score in `decision.md` |
 
 Theme ideas to test, not findings: order execution, app outages at market open, login and 2FA, charts, funds and withdrawals, charges. The problem statement's examples, such as KYC, may not fit a trading app already past onboarding.
 
