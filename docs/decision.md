@@ -31,6 +31,7 @@ Changes to the contract between Half A and Half B always need both people's agre
 | Q3 | Which recipient for the draft? | Yourself, set in a git-ignored file. See D-021 |
 | Q7 | Does the Docs MCP server have a create tool? | No: Google's reference page and a third-party review both list only `read_doc` and `update_doc`. See D-015. Rechecked against the live list in Phase 1 |
 | Q4 | Can the teammate's machine run a local model? | It no longer needs to: a hosted free API is the default (D-022). Local Ollama is optional |
+| Q2 | Which Google account owns the doc and draft? | Tejas's college Google account. The address is kept in the git-ignored `config.local.toml`, not in this file (D-021) |
 
 ### Still open
 
@@ -38,7 +39,8 @@ These cannot be settled from here: each needs a person or an outside party.
 
 | # | Question | Owner | Blocks |
 |---|---|---|---|
-| Q2 | Which Google account owns the doc and draft? Only Tejas can sign the Docs and Gmail connectors in. Check which account the Drive connector already uses | Tejas | Phase 1 (B) |
+| Q11 | The Drive connector in this Claude session is signed in to a different Google account from the project account, so a doc created now would land in the wrong Drive. Reconnect Drive to the project account, then connect Docs and Gmail to the same account | Tejas | Phase 1 (B) |
+| Q12 | The project account is a college (Workspace) account. Its admin may block third-party connectors, or the Docs and Gmail Developer Preview servers. If blocked, ask the admin or use a personal Google account for the doc and draft | Tejas | Phase 1 (B) |
 | Q9 | Create your own Gemini API key in Google AI Studio **without linking billing**, and read the actual free limits shown there. Also read Google's Gemini terms about professional or business use | Both | Phase 0 |
 | Q10 | Create a Groq account and key for the backup, read its limits page, and check whether it asks for a card (the docs did not say). If it needs a card, skip Groq and use local Ollama as the backup | Both | Phase 2 |
 | Q5 | Is an unofficial Play Store library acceptable to whoever assesses this milestone? Work continues on the assumption it is, with the fallback in D-006 | Tejas | Not blocking |
@@ -217,6 +219,7 @@ These cannot be settled from here: each needs a person or an outside party.
 - **Decision:** The Gmail draft is addressed to the Google account that owns it (self). The address lives in `config.local.toml`, which is git-ignored. A committed `config.example.toml` shows the format.
 - **Why:** C6 allows self or an alias, and self needs no extra setup. Keeping the address out of the repo means the teammate and any future public copy never see it.
 - **Alternative:** A dedicated alias, which can be swapped in later by editing one file.
+- **Update 2026-11-06:** the owning account is Tejas's college Google account, set in `config.local.toml`. Connector setup is tracked in Q11 and Q12.
 
 ### D-022: Hosted free LLM API by default: Gemini first, Groq as backup
 
