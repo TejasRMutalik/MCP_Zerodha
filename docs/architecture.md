@@ -164,16 +164,16 @@ The 3 quotes do reach the delivery agent, because they are in the note. They are
   4. Drive create_file            Otherwise create an empty Google Doc
   5. Docs update_doc              Write the note
   6. Docs read_doc                Read back and compare against pulse_note.md
-  7. Gmail create_draft           To the recipient in config.toml, never from the note
+  7. Gmail create_draft           To the recipient in config.local.toml, never from the note
   8. Write delivery.json          Doc ID, draft ID, timestamp
 ```
 
 ### Draft-only enforcement
 
-The Gmail server also exposes tools that send or forward mail. "Draft only" is enforced in three layers:
+It is unclear whether the Gmail server exposes tools that send or forward mail: the connector listing shows `forward`, while Google's reference page lists none ([D-016](decision.md#d-016-draft-only-is-enforced-by-permissions)). So "draft only" is enforced in three layers:
 
 1. `.claude/settings.json` allows `create_draft` and denies every send, forward, filter and label tool by exact name.
-2. The recipient comes from `config.toml`, not from the note or the agent.
+2. The recipient comes from `config.local.toml`, not from the note or the agent.
 3. Eval P3-B6 confirms that a run leaves a draft and adds nothing to Sent.
 
 ## 7. Privacy
@@ -200,7 +200,8 @@ The Gmail server also exposes tools that send or forward mail. "Draft only" is e
 E:\MCP
 ├── problemstatement.md
 ├── README.md                     weekly re-run guide (Phase 5)
-├── config.toml                   app IDs, window, model, recipient alias
+├── config.toml                   app IDs, window, model
+├── config.local.toml             recipient address, gitignored
 ├── pyproject.toml
 ├── .env                          optional free hosted-LLM key, never committed
 ├── docs/                         these four documents

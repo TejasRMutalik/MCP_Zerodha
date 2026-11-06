@@ -23,15 +23,25 @@ Changes to the contract between Half A and Half B always need both people's agre
 
 "Blocks" means work cannot be finished until it is answered.
 
+### Resolved on 2026-11-06
+
+| # | Question | Outcome |
+|---|---|---|
+| Q1 | Does "Zerodha" mean the Kite app? | Yes: Kite. See D-001 |
+| Q3 | Which recipient for the draft? | Yourself, set in a git-ignored file. See D-021 |
+| Q7 | Does the Docs MCP server have a create tool? | No: Google's reference page and a third-party review both list only `read_doc` and `update_doc`. See D-015. Rechecked against the live list in Phase 1 |
+
+### Still open
+
+These cannot be settled from here: each needs a person or an outside party.
+
 | # | Question | Owner | Blocks |
 |---|---|---|---|
-| Q1 | Does "Zerodha" mean the **Kite** app? Zerodha also has other apps, such as Coin | Tejas | Phase 0 |
-| Q2 | Which Google account owns the doc and draft? Connectors act as whichever account signed in, so it should be checked before Phase 1. The Drive connector is already signed in to an account | Tejas | Phase 1 (B) |
-| Q3 | What recipient alias should the draft use? | Tejas | Phase 3 (B) |
-| Q4 | Which local model, and can both machines run it? Check RAM and whether there is a GPU. A machine that cannot run it uses the free hosted option (D-020) | Both | Phase 2 |
-| Q5 | Is an unofficial Play Store library acceptable to whoever assesses this milestone? See D-006 | Both | Phase 1 (A) |
+| Q2 | Which Google account owns the doc and draft? Only Tejas can sign the Docs and Gmail connectors in. Check which account the Drive connector already uses | Tejas | Phase 1 (B) |
+| Q4 | Can the teammate's machine run a local model? Tejas's can (D-020). The teammate runs the hardware check in D-020 and posts the result. If it cannot, they use the free hosted option | Teammate | Phase 2 |
+| Q5 | Is an unofficial Play Store library acceptable to whoever assesses this milestone? Work continues on the assumption it is, with the fallback in D-006 | Tejas | Not blocking |
 | Q6 | Teammate's name, for the owner fields | Tejas | No |
-| Q7 | Does Docs MCP really have no create tool? Confirm from the live tool list | Tejas | Phase 1 (B) |
+| Q8 | Does the teammate agree with D-019, D-020 and D-021? | Teammate | Phase 0 |
 
 ---
 
@@ -39,7 +49,7 @@ Changes to the contract between Half A and Half B always need both people's agre
 
 ### D-001: Product is Zerodha Kite
 
-- **Date:** 2026-11-06 · **Status:** Proposed (Q1) · **Owner:** Tejas
+- **Date:** 2026-11-06 · **Status:** Accepted · **Owner:** Tejas
 - **Decision:** `<PRODUCT_NAME>` is **Zerodha Kite**: App Store `1449453802`, Play Store `com.zerodha.kite3`.
 - **Why:** The team chose Zerodha, and Kite is its main trading app. Both IDs were confirmed against the live store listings on 2026-11-06.
 
@@ -106,6 +116,7 @@ Changes to the contract between Half A and Half B always need both people's agre
 - **Decision:** Use the open-source `google-play-scraper` library for public reviews, without login.
 - **Why:** Google offers no public review feed, and the official Play Console export needs developer access to the app, which this team does not have. Tested on 2026-11-06: 1,403 reviews in 12 weeks.
 - **Risk:** It is unofficial and reads public pages, so it fits C1's "no login" rule, but the problem statement says "exports or feeds". It may break if Google changes its pages, and Google's terms should be checked. This is the reason for Q5.
+- **Checked 2026-11-06:** Vendor documentation says Google's official reviews API works only for apps you manage in Play Console, so it cannot be used for Kite. Sources disagree on whether scraping public reviews breaches Google's terms, and Google's own policy text was not found. Mitigations: only public fields are kept, no reviewer identifier is ever stored (D-008), raw data is never committed, and the run is weekly and small. **Fallback if it is ruled out:** the App Store feed alone (122 reviews in 12 weeks) plus a manually exported public dataset, with the limits that implies.
 - **Alternative:** A public dataset, but these are unlikely to cover the most recent 12 weeks.
 
 ### D-008: Allowlist fields at the adapter
@@ -149,17 +160,20 @@ Changes to the contract between Half A and Half B always need both people's agre
 
 ### D-015: Create the doc through Drive, fill it through Docs
 
-- **Date:** 2026-11-06 · **Status:** Proposed (Q7) · **Owner:** Tejas
+- **Date:** 2026-11-06 · **Status:** Accepted, recheck against the live tool list in Phase 1 · **Owner:** Tejas
 - **Decision:** Drive `create_file` makes an empty Google Doc. Docs `update_doc` writes the note.
 - **Why:** The registry lists only `read_doc` and `update_doc` for the Docs server. Drive `create_file` can create a native Google Doc, so content still goes through the Docs MCP server, matching "create or update".
 - **Risk:** Section 10 says "created through the Google Docs MCP server". If the assessor reads that strictly, a Docs server with a create tool is needed.
+- **Risk:** Google marks the Docs and Gmail MCP servers as Developer Preview, so their tools may change.
 
 ### D-016: Draft-only is enforced by permissions
 
 - **Date:** 2026-11-06 · **Status:** Proposed · **Owner:** Tejas
-- **Decision:** Allow `create_draft` and deny all Gmail send and forward tools by exact name. Take the recipient from `config.toml`.
-- **Why:** The Gmail server exposes more than drafting, including `forward`. C6 should hold even if the agent makes a mistake.
-- **To do:** Add exact tool names here once the connector is live (task B1.2).
+- **Decision:** Allow `create_draft` and deny all Gmail send and forward tools by exact name. Take the recipient from `config.local.toml` (D-021).
+- **Why:** The Gmail connector's registry listing shows 29 tools, including `forward`, `create_filter` and `delete_label`. C6 should hold even if the agent makes a mistake.
+- **Checked 2026-11-06:** Google's reference page for the Gmail MCP server lists 10 tools (`create_draft`, `get_message`, `get_thread`, `label_message`, `label_thread`, `list_drafts`, `list_labels`, `search_threads`, `unlabel_message`, `unlabel_thread`) and none that sends or forwards mail. The connector registry shows 29 tools including `forward`. The two disagree, so the live list decides.
+- **Known:** `create_draft` takes `to` as a plain email address (not "Name <email>"), plus `subject` and `body`, and returns only the draft ID.
+- **Rule until then:** the allowlist is the real guard, with `create_draft` as the only Gmail tool permitted. The deny rules are a second layer. Task B1.2 records the live tool names here.
 
 ### D-017: Delivery is safe to rerun
 
@@ -181,10 +195,26 @@ Changes to the contract between Half A and Half B always need both people's agre
 - **Decision:** All LLM calls go through one function, `llm.complete(prompt, schema)`, in `src/pulse/llm/`. The default provider is a local model served by **Ollama**. An optional free hosted tier can be added as a second provider for a machine that cannot run the local model.
 - **Why:** A local model costs nothing, has no rate limits or keys, and review text stays on the machine. One interface means a provider change never touches the rest of the code, and each person can use whichever works on their hardware.
 - **Model choice:** Not fixed yet. In Phase 3 (task A3.7) each available model is scored on the 100-review gold set, and the best one that runs on both machines is recorded here.
-- **To confirm in Phase 0:** that the chosen Ollama version accepts a JSON schema for structured output, and that setting temperature to 0 and a fixed seed makes runs repeatable. Both help eval P3-A6.
+- **Checked 2026-11-06 against Ollama's docs:** a JSON schema goes in the `format` field (Python: `format=Model.model_json_schema()`), and `options` accepts `temperature` and `seed`. The docs recommend temperature 0 for more deterministic output. Whether that gives identical runs is still tested by eval P3-A6. Ollama's cloud does not support structured outputs, so only a local server is used.
+- **Candidate models** (download sizes from Ollama's library): `qwen3:4b` 2.5 GB, `gemma3:4b` 3.4 GB, `llama3.2:3b` 2.0 GB, and the larger `qwen3:8b` 5.2 GB.
+- **Tejas's machine:** 15.7 GB RAM, i5-12450H, RTX 3050 Laptop GPU with 4 GB video memory. The 2–3.4 GB models should fit on the GPU. The 8B model would spill onto the CPU and run slowly. Ollama is not installed yet.
+- **Teammate's hardware check** (PowerShell on Windows). Post the result in the repo or chat:
+
+```powershell
+"{0:N1} GB RAM" -f ((Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory/1GB); Get-CimInstance Win32_VideoController | Select-Object Name; nvidia-smi --query-gpu=name,memory.total --format=csv
+```
+
+  With about 8 GB RAM and no dedicated GPU, a 3–4B model still runs on the CPU, just slowly. Below that, use the hosted option.
 - **Risk:** Small local models write weaker notes and label themes less accurately. The validation gate and gold set exist to catch this. If the quality is not good enough, the fallback is the free hosted tier, never a paid one.
 - **Risk:** A hosted free tier receives review text. It is public and PII-scrubbed, but some free tiers may use inputs for training, so check the terms before using one. Neither tier's current limits have been verified.
 - **Alternative:** Hosted free tier only, which is easier to set up but depends on limits and terms outside our control.
+
+### D-021: Draft recipient is the owner's own address, kept out of git
+
+- **Date:** 2026-11-06 · **Status:** Proposed · **Owner:** Tejas
+- **Decision:** The Gmail draft is addressed to the Google account that owns it (self). The address lives in `config.local.toml`, which is git-ignored. A committed `config.example.toml` shows the format.
+- **Why:** C6 allows self or an alias, and self needs no extra setup. Keeping the address out of the repo means the teammate and any future public copy never see it.
+- **Alternative:** A dedicated alias, which can be swapped in later by editing one file.
 
 ---
 

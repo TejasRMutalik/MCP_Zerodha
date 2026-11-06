@@ -22,7 +22,7 @@
 | P0-1 | Both people can set up from a clean clone | Manual | `uv sync` works on both machines |
 | P0-2 | Sample files match the contract | Auto | `schema.py` validates both files |
 | P0-3 | Sample data covers hard cases | Manual | Includes a redacted review, an `other` theme, a short review and an empty title |
-| P0-4 | Secrets and data stay out of git | Auto | `.env` and `data/` are ignored |
+| P0-4 | Secrets and data stay out of git | Auto | `.env`, `data/` and `config.local.toml` are ignored |
 | P0-5 | Blocking questions closed | Manual | Every "Blocks" item in the open questions list has an answer |
 | P0-6 | Free LLM works on both machines | Manual | `llm.complete()` returns schema-valid JSON for a test prompt on each machine, with no paid API key set |
 
@@ -138,7 +138,7 @@
 | P3-B3 | Retries are bounded | Auto | A note that never passes stops after 2 retries with nothing delivered |
 | P3-B4 | Hash lock works | Auto | Editing the note after validation makes delivery refuse |
 | P3-B5 | Doc and draft are created through MCP | Manual | Both exist and match `pulse_note.md` |
-| P3-B6 | Draft only (C6) | Manual | One new item in Drafts, none added to Sent, recipient equals `config.toml` |
+| P3-B6 | Draft only (C6) | Manual | One new item in Drafts, none added to Sent, recipient equals `config.local.toml` |
 | P3-B7 | Reruns are safe | Manual | Running delivery twice leaves one doc and one draft |
 | P3-B8 | Partial failure recovers | Manual | With a draft failure simulated after the doc step, a rerun finishes without a second doc |
 | P3-B9 | No direct Google integration (C5) | Auto | No `googleapis.com`, `google-auth` or `google-api-python-client` in code or dependencies |

@@ -38,7 +38,7 @@ Phase 5   Weekly run, README    ████ both
 
 | # | Task | Owner |
 |---|---|---|
-| 0.1 | Run `git init`, add `.gitignore` (`data/`, `.env`), create the shared repo | Both |
+| 0.1 | Run `git init`, add `.gitignore` (`data/`, `.env`, `config.local.toml`), create the shared repo | Both |
 | 0.2 | Create the folder layout from the architecture doc, plus `pyproject.toml` and `config.toml` | Both |
 | 0.3 | Write `contracts/schema.py` for both shared files | Both |
 | 0.4 | Hand-write `contracts/samples/` with 30 fake reviews and 5 themes. Include a redacted review, an `other` theme and short reviews | Both |
