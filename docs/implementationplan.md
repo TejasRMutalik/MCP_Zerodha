@@ -51,6 +51,8 @@ Phase 5   Weekly run, README    ████ both
 
 **Status on 2026-11-06 (Tejas):** 0.2, 0.3, 0.4 and 0.7 are built and tested (`uv run pytest`). 0.6 and 0.8 are done for Tejas's keys, with results in D-022. Still to do: the teammate's keys and test batch (0.6, 0.8), Q9/Q10 limits, and the teammate's review of the contract.
 
+**Status update 2026-11-10 (Tejas):** Q2 is settled (personal Google account), Q9 and Q10 are skipped. Phase 2 Half B has started: B2.1 (ranker) and B2.2 (quote filter) are built and tested, with a local `find_pii` stub until A2.4. B1.1 is decided; connecting the connectors (Q11) and B1.2 to B1.6 are deferred until the note generator works, and must be done before any delivery code is trusted.
+
 **Status update 2026-11-07 (Ace):** 0.6 and 0.8 are done for Ace's keys. Groq works on both models (`gpt-oss-20b` in 2.2 s, `gpt-oss-120b` in 3.5 s, 50/50 correct). A first Gemini key was blocked with HTTP 403 free-tier-unavailable; a key created in a fresh AI Studio project works — three consecutive 50-review batches passed 50/50 in 3.7–4.6 s with no 429, and no rate-limit headers are returned (Q9's caps remain unreadable that way). Both providers now work on both machines. Q8 (agreement with D-019–D-023) and the numbers behind Q9/Q10 are still owed by Ace.
 
 ---
