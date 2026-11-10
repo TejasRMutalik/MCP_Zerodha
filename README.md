@@ -22,15 +22,15 @@ Related docs: [Problem statement](problemstatement.md) ·
 | Phase 0 · Foundation | ✅ Mostly done | Scaffold, data contract, samples and LLM interface built and tested |
 | Phase 0 · Keys 0.6, 0.8 | ✅ Done | Both providers work on Tejas's and Ace's keys (Groq 2.2–3.5 s, Gemini 3.7–4.6 s per 50-review batch, 50/50 correct); recorded in D-022 |
 | Phase 0 · Q9/Q10 limits | ⏭️ Skipped | Not blocking; see D-022 |
-| Phase 1 · B: MCP connection | ⬜ Not started | Google account decided (personal account, Q2). Connectors still to be attached to it (Q11); not needed until delivery work |
+| Phase 1 · B: MCP connection | ✅ Done | Google Workspace MCP active on personal account (`tejasmutalik@gmail.com`). Live tools: `manage_docs`, `manage_drive`, `manage_email`. Spikes verified (doc created/read back, draft created in Drafts, zero sent mail). P1-B1 to P1-B7 pass. |
 | Phase 1 · A: Ingestion | ⬜ Not started | Teammate's half |
-| Phase 2 · B: Note generator | 🔶 In progress | Ranker, quote filter, note format, writer and renderer done (B2.1 to B2.5); `python -m pulse.note` makes `pulse_note.md` from the two files. Validation gate built (`python -m pulse.validate`, SHA-256 hash lock). Next: prompt tuning on real data (B2.6), then connect the Google connectors (Phase 1 B) |
+| Phase 2 · B: Note generator | ✅ Done | Ranker, quote filter, note format, writer, renderer and validation gate built with SHA-256 hash lock (PRs #6, #8, #10). All 81 tests pass. |
 | Phase 2 · A, Phase 3–5 | ⬜ Not started | — |
 
 **Snapshot (2026-11-10):**
 
-- 55/55 tests pass. Half B `src/pulse/note/` has the ranker and quote filter (PR #6).
-- Q2, Q9, Q10, Q12 are closed. Open: Q8 (Ace, issue #4), Q11, Q5, Q6.
+- 81/81 tests pass (`uv run pytest`).
+- Q2, Q9, Q10, Q11, Q12 are closed. Open: Q8 (Ace, issue #4), Q5, Q6.
 
 **Earlier snapshot (2026-11-07):**
 

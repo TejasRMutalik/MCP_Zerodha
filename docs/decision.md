@@ -29,12 +29,13 @@ Changes to the contract between Half A and Half B always need both people's agre
 |---|---|---|
 | Q1 | Does "Zerodha" mean the Kite app? | Yes: Kite. See D-001 |
 | Q3 | Which recipient for the draft? | Yourself, set in a git-ignored file. See D-021 |
-| Q7 | Does the Docs MCP server have a create tool? | No: Google's reference page and a third-party review both list only `read_doc` and `update_doc`. See D-015. Rechecked against the live list in Phase 1 |
+| Q7 | Does the Docs MCP server have a create tool? | Yes: live tool `manage_docs` supports `create` directly. See D-015 |
 | Q4 | Can the teammate's machine run a local model? | It no longer needs to: a hosted free API is the default (D-022). Local Ollama is optional |
 | Q9 | Actual free limits for Gemini | Skipped on 2026-11-10: exact caps do not block any phase. See D-022 |
 | Q10 | Groq card requirement and limits | Skipped on 2026-11-10: exact caps do not block any phase. See D-022 |
 | Q2 | Which Google account owns the doc and draft? | Decided by Tejas on 2026-11-10: his personal Google account. The address is kept only in `config.local.toml`. See D-021 |
 | Q12 | Will college Workspace account block connectors? | Resolved: the personal Google account is used, so the college Workspace restrictions do not apply |
+| Q11 | Connect Drive, Docs, and Gmail MCP connectors | Resolved on 2026-11-10: Connected via `@aaronsb/google-workspace-mcp` to personal account. Live tools: `manage_docs`, `manage_drive`, `manage_email`. Spikes verified (doc ID `1xeo3GZknwGou4JytBWC_71UGEmgVgdb5ZEAgP2SjAlM`, draft `r2995113518879698448`). See D-015, D-016 |
 
 ### Still open
 
@@ -42,7 +43,6 @@ These cannot be settled from here: each needs a person or an outside party.
 
 | # | Question | Owner | Blocks |
 |---|---|---|---|
-| Q11 | Connect Drive, Docs, and Gmail MCP connectors to the personal Google account chosen in Q2 | Tejas | Phase 1 (B) |
 | Q5 | Is an unofficial Play Store library acceptable to whoever assesses this milestone? Work continues on the assumption it is, with the fallback in D-006 | Tejas | Not blocking |
 | Q6 | Teammate's name, for the owner fields | Tejas | No |
 | Q8 | Does the teammate agree with D-019 to D-023? | Teammate | Phase 0 |
@@ -169,6 +169,7 @@ These cannot be settled from here: each needs a person or an outside party.
 - **Why:** The registry lists only `read_doc` and `update_doc` for the Docs server. Drive `create_file` can create a native Google Doc, so content still goes through the Docs MCP server, matching "create or update".
 - **Risk:** Section 10 says "created through the Google Docs MCP server". If the assessor reads that strictly, a Docs server with a create tool is needed.
 - **Risk:** Google marks the Docs and Gmail MCP servers as Developer Preview, so their tools may change.
+- **Update 2026-11-10 (Phase 1 B Spike):** The active MCP server (`google-workspace`) exposes `manage_docs`, which natively supports `operation: "create"`, `write`, and `get`. Doc creation and text appending verified directly without needing Drive `create_file` (Spike doc ID: `1xeo3GZknwGou4JytBWC_71UGEmgVgdb5ZEAgP2SjAlM`).
 
 ### D-016: Draft-only is enforced by permissions
 
@@ -178,6 +179,7 @@ These cannot be settled from here: each needs a person or an outside party.
 - **Checked 2026-11-06:** Google's reference page for the Gmail MCP server lists 10 tools (`create_draft`, `get_message`, `get_thread`, `label_message`, `label_thread`, `list_drafts`, `list_labels`, `search_threads`, `unlabel_message`, `unlabel_thread`) and none that sends or forwards mail. The connector registry shows 29 tools including `forward`. The two disagree, so the live list decides.
 - **Known:** `create_draft` takes `to` as a plain email address (not "Name <email>"), plus `subject` and `body`, and returns only the draft ID.
 - **Rule until then:** the allowlist is the real guard, with `create_draft` as the only Gmail tool permitted. The deny rules are a second layer. Task B1.2 records the live tool names here.
+- **Update 2026-11-10 (Phase 1 B Spike):** The active tool is `manage_email`. Draft creation was executed via `operation: "send"` with `draft: true`. Spike draft created (ID: `r2995113518879698448`); verified via `listDrafts` and confirmed zero sent messages via `in:sent` search.
 
 ### D-017: Delivery is safe to rerun
 

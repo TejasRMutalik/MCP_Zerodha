@@ -65,7 +65,7 @@
 
 | Date | Run by | Checks | Result | Notes |
 |---|---|---|---|---|
-| | | | | |
+| 2026-11-10 | Tejas | P1-B1 to P1-B7 | PASS | Google Workspace MCP active on personal account. Live tools: `manage_docs`, `manage_drive`, `manage_email`. Test doc (`1xeo3GZknwGou4JytBWC_71UGEmgVgdb5ZEAgP2SjAlM`) created and read back with formatting intact. Test draft (`r2995113518879698448`) confirmed in Drafts; zero sent messages confirmed via `in:sent` search. |
 
 ---
 
