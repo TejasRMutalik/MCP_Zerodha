@@ -24,7 +24,7 @@ Related docs: [Problem statement](problemstatement.md) ·
 | Phase 0 · Q9/Q10 limits | ⏭️ Skipped | Not blocking; see D-022 |
 | Phase 1 · B: MCP connection | ⬜ Not started | Google account decided (personal account, Q2). Connectors still to be attached to it (Q11); not needed until delivery work |
 | Phase 1 · A: Ingestion | ⬜ Not started | Teammate's half |
-| Phase 2 · B: Note generator | 🔶 In progress | Ranker and quote filter done (B2.1, B2.2). Next: note format, writer, renderer, validation gate |
+| Phase 2 · B: Note generator | 🔶 In progress | Ranker, quote filter, note format, writer and renderer done (B2.1 to B2.5); `python -m pulse.note` makes `pulse_note.md` from the two files. Next: prompt tuning (B2.6), validation gate |
 | Phase 2 · A, Phase 3–5 | ⬜ Not started | — |
 
 **Snapshot (2026-11-10):**
@@ -47,8 +47,8 @@ Related docs: [Problem statement](problemstatement.md) ·
 | Config loading | `src/pulse/config.py` | Built — `config.toml`, `config.local.toml`, `.env` |
 | Swappable LLM interface | `src/pulse/llm/` | Built — Gemini default, Groq backup; batching, retry/failover, per-review cache. Ollama optional, not built |
 | Sample contract data | `contracts/samples/` | Built — 30 fake reviews, 5 themes |
-| Ranker and quote filter | `src/pulse/note/` | Built — impact ranking, quote eligibility (B2.1, B2.2) |
-| Tests | `tests/` | Built — 55 tests (schema, LLM, constraints, ranker, quotes) |
+| Note generator | `src/pulse/note/` | Built — ranker, quote filter, structured note, LLM writer (no tools, quotes by ID), renderer, `python -m pulse.note` (B2.1 to B2.5) |
+| Tests | `tests/` | Built — 68 tests (schema, LLM, constraints, ranker, quotes, note writer) |
 | Ingest, PII, themes, note writer, validate, CLI | `src/pulse/…` | **Not built** — planned per implementation plan |
 | MCP delivery (`.claude/`) | — | **Not built** — Phase 1 B, after the connectors are attached to the personal account |
 
