@@ -55,6 +55,8 @@ Phase 5   Weekly run, README    ████ both
 
 **Status update 2026-11-10 (Tejas, later):** B2.3 to B2.5 are built: structured note, writer with retry and quote-ID checks, renderer, and `python -m pulse.note`. A real Gemini run on the 30 sample reviews produced a valid, specific note within the word limit. B2.6 (prompt tuning on real data) and the validation gate remain.
 
+**Status update 2026-11-10 (Tejas, gate):** the validation gate is built: length, shape, ranking, numbers, verbatim and attribution, and PII checks run on the finished note text independently of the writer; a pass records the note's SHA-256 in `validation.json`, and `is_deliverable()` is what delivery must call first. Next for Tejas: connect the Google connectors to the personal account (Q11), then Phase 1 B.
+
 **Status update 2026-11-07 (Ace):** 0.6 and 0.8 are done for Ace's keys. Groq works on both models (`gpt-oss-20b` in 2.2 s, `gpt-oss-120b` in 3.5 s, 50/50 correct). A first Gemini key was blocked with HTTP 403 free-tier-unavailable; a key created in a fresh AI Studio project works — three consecutive 50-review batches passed 50/50 in 3.7–4.6 s with no 429, and no rate-limit headers are returned (Q9's caps remain unreadable that way). Both providers now work on both machines. Q8 (agreement with D-019–D-023) and the numbers behind Q9/Q10 are still owed by Ace.
 
 ---
