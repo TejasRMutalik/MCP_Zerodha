@@ -15,18 +15,24 @@ Related docs: [Problem statement](problemstatement.md) ·
 
 ---
 
-## Current status: Phase 0 complete, Phase 1 in progress
+## Current status: Phase 0 complete, Half B build started
 
 | Area | Status | Notes |
 |---|---|---|
 | Phase 0 · Foundation | ✅ Mostly done | Scaffold, data contract, samples and LLM interface built and tested |
 | Phase 0 · Keys 0.6, 0.8 | ✅ Done | Both providers work on Tejas's and Ace's keys (Groq 2.2–3.5 s, Gemini 3.7–4.6 s per 50-review batch, 50/50 correct); recorded in D-022 |
 | Phase 0 · Q9/Q10 limits | ⏭️ Skipped | Not blocking; see D-022 |
-| Phase 1 · B: MCP connection | 🔶 In progress | Drive connected; Docs and Gmail available but **not connected** |
+| Phase 1 · B: MCP connection | ⬜ Not started | Google account decided (personal account, Q2). Connectors still to be attached to it (Q11); not needed until delivery work |
 | Phase 1 · A: Ingestion | ⬜ Not started | Teammate's half |
-| Phase 2–5 | ⬜ Not started | — |
+| Phase 2 · B: Note generator | 🔶 In progress | Ranker and quote filter done (B2.1, B2.2). Next: note format, writer, renderer, validation gate |
+| Phase 2 · A, Phase 3–5 | ⬜ Not started | — |
 
-**Snapshot (2026-11-07):**
+**Snapshot (2026-11-10):**
+
+- 55/55 tests pass. Half B `src/pulse/note/` has the ranker and quote filter (PR #6).
+- Q2, Q9, Q10, Q12 are closed. Open: Q8 (Ace, issue #4), Q11, Q5, Q6.
+
+**Earlier snapshot (2026-11-07):**
 
 - 46/46 tests pass (`uv run pytest`).
 - Git tree is clean; 6 commits on the default branch.
@@ -41,9 +47,10 @@ Related docs: [Problem statement](problemstatement.md) ·
 | Config loading | `src/pulse/config.py` | Built — `config.toml`, `config.local.toml`, `.env` |
 | Swappable LLM interface | `src/pulse/llm/` | Built — Gemini default, Groq backup; batching, retry/failover, per-review cache. Ollama optional, not built |
 | Sample contract data | `contracts/samples/` | Built — 30 fake reviews, 5 themes |
-| Tests | `tests/` | Built — 46 tests (schema, LLM, constraints) |
-| Ingest, PII, themes, note, validate, CLI | `src/pulse/…` | **Not built** — planned per implementation plan |
-| MCP delivery (`.claude/`) | — | **Not built** — Phase 1 B; Drive connector is set up first |
+| Ranker and quote filter | `src/pulse/note/` | Built — impact ranking, quote eligibility (B2.1, B2.2) |
+| Tests | `tests/` | Built — 55 tests (schema, LLM, constraints, ranker, quotes) |
+| Ingest, PII, themes, note writer, validate, CLI | `src/pulse/…` | **Not built** — planned per implementation plan |
+| MCP delivery (`.claude/`) | — | **Not built** — Phase 1 B, after the connectors are attached to the personal account |
 
 ## Where this repo is going
 
