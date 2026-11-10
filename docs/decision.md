@@ -23,7 +23,7 @@ Changes to the contract between Half A and Half B always need both people's agre
 
 "Blocks" means work cannot be finished until it is answered.
 
-### Resolved on 2026-11-06
+### Resolved
 
 | # | Question | Outcome |
 |---|---|---|
@@ -31,6 +31,10 @@ Changes to the contract between Half A and Half B always need both people's agre
 | Q3 | Which recipient for the draft? | Yourself, set in a git-ignored file. See D-021 |
 | Q7 | Does the Docs MCP server have a create tool? | No: Google's reference page and a third-party review both list only `read_doc` and `update_doc`. See D-015. Rechecked against the live list in Phase 1 |
 | Q4 | Can the teammate's machine run a local model? | It no longer needs to: a hosted free API is the default (D-022). Local Ollama is optional |
+| Q9 | Actual free limits for Gemini | Skipped on 2026-11-10: exact caps do not block any phase. See D-022 |
+| Q10 | Groq card requirement and limits | Skipped on 2026-11-10: exact caps do not block any phase. See D-022 |
+| Q2 | Which Google account owns the doc and draft? | Tejas's personal Google account (`tejasmutalik@gmail.com`). Set in `config.local.toml`. See D-021 |
+| Q12 | Will college Workspace account block connectors? | Resolved: Using personal Google account (`tejasmutalik@gmail.com`), bypassing Workspace restrictions |
 
 ### Still open
 
@@ -38,11 +42,7 @@ These cannot be settled from here: each needs a person or an outside party.
 
 | # | Question | Owner | Blocks |
 |---|---|---|---|
-| Q2 | Which Google account owns the doc and draft? Tejas offered his college account, but the teammate makes the final choice. Q11 and Q12 wait for this answer, and the recipient in `config.local.toml` must match it | Teammate | Phase 1 (B) |
-| Q11 | The Drive connector in this Claude session is signed in to a different Google account from the project account, so a doc created now would land in the wrong Drive. Reconnect Drive to the project account, then connect Docs and Gmail to the same account | Tejas | Phase 1 (B) |
-| Q12 | The project account is a college (Workspace) account. Its admin may block third-party connectors, or the Docs and Gmail Developer Preview servers. If blocked, ask the admin or use a personal Google account for the doc and draft | Tejas | Phase 1 (B) |
-| Q9 | Create your own Gemini API key in Google AI Studio **without linking billing**, and read the actual free limits shown there. Also read Google's Gemini terms about professional or business use | Both | Phase 0 |
-| Q10 | Create a Groq account and key for the backup, read its limits page, and check whether it asks for a card (the docs did not say). If it needs a card, skip Groq and use local Ollama as the backup | Both | Phase 2 |
+| Q11 | Connect Drive, Docs, and Gmail MCP connectors to the agreed personal Google account (`tejasmutalik@gmail.com`) | Tejas | Phase 1 (B) |
 | Q5 | Is an unofficial Play Store library acceptable to whoever assesses this milestone? Work continues on the assumption it is, with the fallback in D-006 | Tejas | Not blocking |
 | Q6 | Teammate's name, for the owner fields | Tejas | No |
 | Q8 | Does the teammate agree with D-019 to D-023? | Teammate | Phase 0 |
@@ -220,6 +220,7 @@ These cannot be settled from here: each needs a person or an outside party.
 - **Why:** C6 allows self or an alias, and self needs no extra setup. Keeping the address out of the repo means the teammate and any future public copy never see it.
 - **Alternative:** A dedicated alias, which can be swapped in later by editing one file.
 - **Update 2026-11-06:** Tejas offered his college Google account, but the teammate will make the final choice (Q2). `config.local.toml` must be updated to match whichever account is chosen. Connector setup is tracked in Q11 and Q12.
+- **Update 2026-11-10:** Personal Google account (`tejasmutalik@gmail.com`) chosen for ownership of Google Doc and Gmail draft, resolving Q2 and Q12. `config.local.toml` recipient configured accordingly. Connector setup tracked in Q11.
 
 ### D-022: Hosted free LLM API by default: Gemini first, Groq as backup
 
