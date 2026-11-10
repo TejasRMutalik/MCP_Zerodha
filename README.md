@@ -21,7 +21,7 @@ Related docs: [Problem statement](problemstatement.md) ·
 |---|---|---|
 | Phase 0 · Foundation | ✅ Mostly done | Scaffold, data contract, samples and LLM interface built and tested |
 | Phase 0 · Keys 0.6, 0.8 | ✅ Done | Both providers work on Tejas's and Ace's keys (Groq 2.2–3.5 s, Gemini 3.7–4.6 s per 50-review batch, 50/50 correct); recorded in D-022 |
-| Phase 0 · Q9/Q10 limits | ⏳ Open | Two open questions still in decision.md |
+| Phase 0 · Q9/Q10 limits | ⏭️ Skipped | Not blocking; see D-022 |
 | Phase 1 · B: MCP connection | 🔶 In progress | Drive connected; Docs and Gmail available but **not connected** |
 | Phase 1 · A: Ingestion | ⬜ Not started | Teammate's half |
 | Phase 2–5 | ⬜ Not started | — |
