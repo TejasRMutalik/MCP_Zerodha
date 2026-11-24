@@ -1,6 +1,12 @@
 # Shared settings. Safe to commit: no secrets and no personal addresses.
 # Personal values (like the draft recipient) go in config.local.toml, which is git-ignored.
 
+[delivery]
+# Title prefix for the weekly Google Doc. Week label is appended: "… | 2026-W45"
+doc_title_prefix = "Zerodha Kite Weekly Review Pulse"
+# Folder for per-week output (note, validation, delivery JSON).
+output_dir = ".cache/w"
+
 [product]
 name = "Zerodha Kite"
 app_store_id = "1449453802"
