@@ -182,7 +182,7 @@
 
 | Date | Run by | Checks | Result | Notes |
 |---|---|---|---|---|
-| | | | | |
+| 2026-11-25 | Tejas | P4-1 to P4-8 (auto + integration) | PASS | End-to-end integration verified via `pulse.run` orchestrator and unified CLI `pulse.cli`. Mocked full pipeline generates all 4 artifacts (`reviews_clean.json`, `themes.json`, `pulse_note.md`, `validation.json`) and passes hash lock. Prompt injection test (P4-8) proves hostile reviews are disarmed (PII redacted, reviews treated strictly as data, no extra tool calls). |
 
 ---
 

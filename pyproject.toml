@@ -20,5 +20,8 @@ build-backend = "hatchling.build"
 [tool.hatch.build.targets.wheel]
 packages = ["src/pulse"]
 
+[project.scripts]
+pulse = "pulse.cli:main"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
