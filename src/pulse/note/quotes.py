@@ -15,16 +15,7 @@ from pulse.schema import Review
 MIN_WORDS = 6
 MAX_WORDS = 25
 
-try:  # Half A publishes the real scrubber (task A2.4).
-    from pulse.pii import find_pii  # type: ignore[attr-defined]
-except ImportError:  # Stub until then: obvious emails, phones, links, handles.
-    _PII = re.compile(
-        r"[\w.+-]+@[\w-]+\.[\w.]+|https?://\S+|www\.\S+|@\w{3,}|(?<!\d)(?:\+?\d[\s-]?){10,}(?!\d)",
-        re.IGNORECASE,
-    )
-
-    def find_pii(text: str) -> list[str]:
-        return [m.group(0) for m in _PII.finditer(text)]
+from pulse.pii import find_pii
 
 
 @dataclass(frozen=True)
