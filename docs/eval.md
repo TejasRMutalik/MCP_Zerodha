@@ -111,7 +111,8 @@
 
 | Date | Run by | Checks | Result | Notes |
 |---|---|---|---|---|
-| | | | | |
+| 2026-11-25 | Tejas | P2-A1 to P2-A4 (auto) | PASS | PII detector and scrubber built in `src/pulse/pii/`. Synthetic test suite with 40+ test cases across 8 PII categories achieves 100% recall. Clean sentences test confirms 0% false positives on financial prices, quantities, and dates. `redacted` flag set accurately and `find_pii()` imported cleanly across the codebase. |
+| 2026-11-10 | Tejas | P2-B1 to P2-B6 (auto) | PASS | Ranker, quote selector, structured writer, and renderer verified with unit tests (all passing). |
 
 ---
 
