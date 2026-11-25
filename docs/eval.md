@@ -65,6 +65,7 @@
 
 | Date | Run by | Checks | Result | Notes |
 |---|---|---|---|---|
+| 2026-11-25 | Tejas | P1-A1 to P1-A7 | PASS | Phase 1 A Ingestion implemented in `src/pulse/ingest/` (`fetch_app_store_reviews`, `fetch_play_store_reviews`, normalise, volume check). 11 tests in `tests/test_ingest.py` pass. Live test on Zerodha Kite over 12 weeks fetched 128 App Store reviews and 1,311 Play Store reviews (1,439 total after deduplication). All fields conform to allowlist with zero identifying fields stored. |
 | 2026-11-10 | Tejas | P1-B1 to P1-B7 | PASS | Google Workspace MCP active on personal account. Live tools: `manage_docs`, `manage_drive`, `manage_email`. Test doc (`1xeo3GZknwGou4JytBWC_71UGEmgVgdb5ZEAgP2SjAlM`) created and read back with formatting intact. Test draft (`r2995113518879698448`) confirmed in Drafts; zero sent messages confirmed via `in:sent` search. |
 
 ---
