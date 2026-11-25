@@ -2,7 +2,7 @@
 
 **Project owner:** Tejas R Mutalik
 **Milestone:** 2
-**Product:** `<PRODUCT_NAME>`, the same product chosen in Milestone 1 (fill in before starting)
+**Product:** Zerodha Kite (App Store: `1449453802`, Google Play: `com.zerodha.kite3`)
 
 ---
 
@@ -142,13 +142,13 @@ ACTION IDEAS
 
 ## 10. Success Criteria
 
-- [ ] Reviews from **both** stores, covering the **8–12 week** window, are imported with rating, title, text and date.
-- [ ] Reviews are grouped into **5 or fewer** themes.
-- [ ] The note has exactly **3 themes, 3 quotes and 3 action ideas** and is **250 words or fewer**.
-- [ ] **No PII** appears in any artifact (checked before publishing).
-- [ ] The Google Doc is created through the **Google Docs MCP server**.
-- [ ] The email **draft** is created through the **Gmail MCP server**, addressed to self or an alias.
-- [ ] No direct Google API integration code is used.
+- [x] Reviews from **both** stores, covering the **8–12 week** window, are imported with rating, title, text and date.
+- [x] Reviews are grouped into **5 or fewer** themes.
+- [x] The note has exactly **3 themes, 3 quotes and 3 action ideas** and is **250 words or fewer**.
+- [x] **No PII** appears in any artifact (checked before publishing).
+- [x] The Google Doc is created through the **Google Docs MCP server**.
+- [x] The email **draft** is created through the **Gmail MCP server**, addressed to self or an alias.
+- [x] No direct Google API integration code is used.
 
 ## 11. Open Items
 

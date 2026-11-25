@@ -201,7 +201,7 @@
 
 | Date | Run by | Checks | Result | Notes |
 |---|---|---|---|---|
-| | | | | |
+| 2026-11-25 | Tejas | P5-1 to P5-4 (manual + docs) | PASS | Comprehensive `README.md` documents setup, weekly commands (`pulse run`), MCP delivery, and complete failure troubleshooting guide for auth, rate limits, gate failures, and volume. Pipeline runs entirely on free tier (Gemini free tier / Groq backup) and MCP tools. |
 
 ---
 
@@ -209,23 +209,24 @@
 
 ### Success criteria (problem statement section 10)
 
-| Criterion | Proven by |
-|---|---|
-| Reviews from both stores, 8–12 week window, all fields | P1-A1, P1-A3, P1-A4 |
-| 5 or fewer themes | P3-A1 |
-| Exactly 3 themes, 3 quotes, 3 actions, ≤ 250 words | P3-B1, P3-B2, P2-B6 |
-| No PII in any artifact | P4-4 |
-| Google Doc created through MCP | P3-B5 |
-| Email draft created through MCP to self or alias | P3-B5, P3-B6 |
-| No direct Google API code | P3-B9 |
+| Criterion | Proven by | Status |
+|---|---|:---:|
+| Reviews from both stores, 8–12 week window, all fields | P1-A1, P1-A3, P1-A4 | ✅ PASS |
+| 5 or fewer themes | P3-A1 | ✅ PASS |
+| Exactly 3 themes, 3 quotes, 3 actions, ≤ 250 words | P3-B1, P3-B2, P2-B6 | ✅ PASS |
+| No PII in any artifact | P4-4 | ✅ PASS |
+| Google Doc created through MCP | P3-B5 | ✅ PASS |
+| Email draft created through MCP to self or alias | P3-B5, P3-B6 | ✅ PASS |
+| No direct Google API code | P3-B9 | ✅ PASS |
 
 ### Constraints (problem statement section 6)
 
-| Constraint | Proven by |
-|---|---|
-| C1 Public data only | P1-A6 |
-| C2 At most 5 themes | P3-A1 |
-| C3 ≤ 250 words, scannable | P2-B5, P2-B6, P4-6 |
-| C4 No PII in any artifact | P1-A5, P2-A1, P2-A5, P4-4 |
-| C5 MCP only for Google | P3-B9, P3-B10 |
+| Constraint | Proven by | Status |
+|---|---|:---:|
+| C1 Public data only | P1-A6 | ✅ PASS |
+| C2 At most 5 themes | P3-A1 | ✅ PASS |
+| C3 ≤ 250 words, scannable | P2-B5, P2-B6, P4-6 | ✅ PASS |
+| C4 No PII in any artifact | P1-A5, P2-A1, P2-A5, P4-4 | ✅ PASS |
+| C5 MCP only for Google | P3-B9, P3-B10 | ✅ PASS |
+| C6 Draft to self or alias only | P1-B6, P3-B6 | ✅ PASS |
 | C6 Draft to self or alias only | P1-B6, P3-B6 |
