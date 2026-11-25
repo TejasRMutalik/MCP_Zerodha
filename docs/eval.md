@@ -154,7 +154,9 @@
 
 | Date | Run by | Checks | Result | Notes |
 |---|---|---|---|---|
-| | | | | |
+| 2026-11-24 | Tejas | P3-B1, P3-B2, P3-B4, P3-B7, P3-B8 (auto) | PASS | 16 automated tests in `tests/test_delivery.py`. All pass. |
+| 2026-11-24 | Tejas | P3-B5, P3-B6, P3-B7 (manual) | PASS | Delivery run via Antigravity MCP (no Claude Code needed). Doc `1xMaWCN7EV-njKqTpf-Y_Yty9yIJnP5dsSnJ82eRFpXs` created and read back — subject line confirmed. Draft `r-3603719627166520442` in Drafts to tejasmutalik@gmail.com; zero messages in Sent (`in:sent` search empty). Re-running pre-flight shows "ALREADY DELIVERED: complete" — no duplicate created. |
+| 2026-11-24 | Tejas | P3-B9 (auto) | PASS | test_constraints.py passes (no googleapis imports or hosts in code). |
 
 ---
 
